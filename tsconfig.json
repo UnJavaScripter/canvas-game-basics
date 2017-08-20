@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "scripts/app.js",
+    "sourceMap": true,
+    "target": "es6"
+  },
+  "include": [
+      "src/scripts/game.ts",
+      "src/scripts/index.ts"
+  ],
+  "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+  ]
+}
