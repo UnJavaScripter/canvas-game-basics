@@ -37,7 +37,7 @@ class Game {
     draw() {
         this.ctx.clearRect(0, 0, this.settingsObj.width, this.settingsObj.heigth);
         this.ctx.fillStyle = this.settingsObj.background;
-        this.ctx.fillRect(0, 0, 800, 800);
+        this.ctx.fillRect(0, 0, this.gameBoard.width, this.gameBoard.height);
         this.moveCharacters(10, 0);
     }
     moveCharacters(x, y) {
@@ -53,8 +53,8 @@ class Game {
                 }
                 lastPos = character.newPos[character.newPos.length - 1];
             }
-            const newX = lastPos.x + x > this.settingsObj.width ? 0 : lastPos.x + x;
-            const newY = lastPos.y + y > this.settingsObj.heigth ? 0 : lastPos.y + y;
+            const newX = lastPos.x + (x * character.speed.x) > this.settingsObj.width ? 0 : lastPos.x + (x * character.speed.x);
+            const newY = lastPos.y + (y * character.speed.y) > this.settingsObj.heigth ? 0 : lastPos.y + (y * character.speed.y);
             this.ctx.fillStyle = character.color;
             this.ctx.fillRect(newX, newY, character.width, character.heigth);
             character.newPos.push({ x: newX, y: newY });
@@ -64,16 +64,31 @@ class Game {
 const gameSettings = {
     background: 'white',
     canvasRef: document.getElementById('gameBoard'),
-    heigth: 800,
-    width: 800
+    heigth: 300,
+    width: 1200
 };
 const character1 = {
     color: 'peru',
     x: 80,
     y: 60,
     width: 25,
-    heigth: 25
+    heigth: 25,
+    speed: {
+        x: 2,
+        y: 2
+    }
+};
+const character2 = {
+    color: 'purple',
+    x: 20,
+    y: 20,
+    width: 25,
+    heigth: 25,
+    speed: {
+        x: 5,
+        y: 1
+    }
 };
 const game = new Game(gameSettings);
-game.init([character1]);
+game.init([character1, character2]);
 //# sourceMappingURL=app.js.map

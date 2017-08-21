@@ -13,6 +13,7 @@ class ICharacter {
   width: number;
   heigth: number;
   newPos?: {x: number, y: number}[]
+  speed: {x: number, y: number}
 }
 
 
@@ -68,7 +69,7 @@ class Game {
     this.ctx.clearRect(0, 0, this.settingsObj.width, this.settingsObj.heigth);
     
     this.ctx.fillStyle = this.settingsObj.background;
-    this.ctx.fillRect(0, 0, 800, 800);
+    this.ctx.fillRect(0, 0, this.gameBoard.width, this.gameBoard.height);
     this.moveCharacters(10, 0);
     
   }
@@ -86,8 +87,8 @@ class Game {
         }
         lastPos = character.newPos[character.newPos.length - 1];
       }
-      const newX = lastPos.x + x > this.settingsObj.width ? 0 : lastPos.x + x;
-      const newY = lastPos.y + y > this.settingsObj.heigth ? 0 : lastPos.y + y;
+      const newX = lastPos.x + (x * character.speed.x) > this.settingsObj.width ? 0 : lastPos.x + (x * character.speed.x);
+      const newY = lastPos.y + (y * character.speed.y) > this.settingsObj.heigth ? 0 : lastPos.y + (y * character.speed.y);
       this.ctx.fillStyle = character.color;
       this.ctx.fillRect(newX, newY, character.width, character.heigth);
       character.newPos.push({x: newX, y: newY});
